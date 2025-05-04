@@ -107,7 +107,7 @@ Our calorie tracking system represents a significant enhancement that deserves f
    ```
    python monthly_calorie_tracker_server.py
    ```
-   
+
 3. The website will automatically open in your default browser at `http://localhost:8000`
 
 ## 🌟 Why This Project Stands Out
@@ -123,11 +123,29 @@ The calorie tracking system transforms what would be a standard website clone in
 
 ## 📱 Screenshots
 
-![Home Page](screenshots/home.png)
-![Menu Page with Calorie Information](screenshots/menu.png)
-![Calorie Calculator](screenshots/calculator.png)
-![User Profile with Tracking](screenshots/profile.png)
-![Cart with Calorie Summary](screenshots/cart.png)
+### Home Page
+![Home Page](screenshots/Screenshot%20(119).png)
+
+### Menu with Calorie Information
+![Menu Page with Calorie Information](screenshots/Screenshot%20(120).png)
+![Menu Items with Calorie Details](screenshots/Screenshot%20(121).png)
+
+### Calorie Calculator
+![Calorie Calculator](screenshots/Screenshot%20(122).png)
+![Calorie Results](screenshots/Screenshot%20(123).png)
+
+### User Profile with Calorie Tracking
+![User Profile Overview](screenshots/Screenshot%20(124).png)
+![Monthly Calorie Tracking](screenshots/Screenshot%20(125).png)
+![Calorie History](screenshots/Screenshot%20(126).png)
+
+### Cart with Calorie Summary
+![Cart Overview](screenshots/Screenshot%20(127).png)
+![Checkout Process](screenshots/Screenshot%20(128).png)
+
+### Calorie Warnings
+![Approaching Limit Warning](screenshots/Screenshot%20(129).png)
+![Exceeded Limit Warning](screenshots/Screenshot%20(130).png)
 
 ## 👥 Contributors
 
