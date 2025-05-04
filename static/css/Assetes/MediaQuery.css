@@ -1,0 +1,870 @@
+@font-face {
+    font-family: 'National2CondensedBold';
+    src: url(../Assetes/Fonts/national2_condensed_bold.otf);
+}
+
+@font-face {
+    font-family: 'National2ragular';
+    src: url(../Assetes/Fonts/national2_regular.otf);
+}
+
+@font-face {
+    font-family: 'National2Medium';
+    src: url(../Assetes/Fonts/national2_medium.otf);
+}
+
+:root {
+    --theam: #EA002A;
+    --black: #000;
+    --white: #fff;
+    --font-color: #000;
+    --second-color: #1C1816;
+    --header-color: #000;
+    --border-color: #000;
+    --light-theme: #1c1816;
+    --border-theme: #1c1816;
+    --footer-theme: #1c1816;
+    --footer-color: #000;
+    --dark-mode: #E4002B;
+    --light-mode: #000;
+    --theam-font: 'National2CondensedBold';
+    --regular-font: 'National2ragular';
+    --font-medium: 'National2Medium'
+}
+
+@media(max-width: 1270px) {
+    .custom-container {
+        width: 95%;
+    }
+}
+
+@media(max-width: 1024px) {
+    .login-field {
+        width: 75%;
+    }
+
+    .product-page {
+        padding: 50px 70px 70px 50px;
+    }
+
+    .product-add {
+        width: 100%;
+    }
+
+    .contant-title-scholar {
+        font-size: 80px;
+        padding: 60px 0px;
+    }
+
+    .fly-cart-btn {
+        right: 50px !important;
+        top: 35px !important;
+    }
+
+    .count-item {
+        right: 0;
+    }
+
+    .web-errow {
+        display: none;
+    }
+
+    .motal-cart-btn {
+        padding: 15px;
+        display: none;
+    }
+
+    .items-prices {
+        height: auto;
+    }
+
+}
+
+@media(max-width: 1126px) {
+    .order-feedback {
+        flex-wrap: wrap;
+    }
+
+    .cart-data img {
+        display: none;
+    }
+}
+
+@media(max-width: 991px) {
+    .modal-sudintive-container .modal-content{
+        width: 90%;
+    }
+    .store-map-item-remove #simplex-maps-parent-container{
+        height: 60vh;
+    }
+    .web-backbtn .back-btn {
+        display: none !important;
+    }
+    .login-container{
+        height: auto;
+    }
+    .extra-mian {
+        display: block;
+    }
+
+    .button-info-gap {
+        flex-wrap: wrap;
+    }
+
+    .reorder-container {
+        justify-content: center;
+    }
+
+    .motal-cart-mobile a {
+        display: block;
+        display: flex;
+    }
+
+    .item-name {
+        padding-left: 0;
+        width: 95%;
+        margin: 0 auto;
+        margin-top: 50px;
+        margin-bottom: 20px;
+    }
+
+    .modal-content {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .mobile-ckeck {
+        /* display: none; */
+    }
+
+    .order-set {
+        order: 1;
+        padding-bottom: 20px;
+    }
+
+    .mobile-cart {
+        width: 70%;
+    }
+
+    .kfc-basket button {
+        font-size: 12px;
+        padding: 5px 31px;
+    }
+
+    .kfc-basket img {
+        width: 160px !important;
+    }
+
+    .kfc-basket h5 {
+        font-size: 14px;
+    }
+
+    .offer-banner {
+        margin-top: 135px;
+    }
+
+    .mt-170 {
+        margin-top: 200px !important;
+    }
+
+    .category-container {
+        top: 130px;
+
+    }
+
+    .browse-container {
+        justify-content: start;
+    }
+
+    .category-container a {
+        width: auto;
+        white-space: nowrap;
+        font-size: 12px;
+        padding: 7px;
+    }
+
+    /* .product-page {
+        padding: 70px 1px 70px 33px;
+    } */
+    .product-add {
+        width: 100%;
+    }
+
+    .quantity-container {
+        gap: 40px;
+        flex-wrap: wrap;
+    }
+
+    .order-through {
+        display: none;
+    }
+
+    .order-mobile {
+        display: block;
+        justify-content: center;
+        display: flex;
+        width: 100%;
+        background-color: var(--header-color);
+        padding: 10px;
+        position: fixed;
+        top: 72px;
+        z-index: 999;
+    }
+
+    .category-cart {
+        display: none;
+    }
+
+    .mobile-cart {
+        display: block;
+    }
+
+    .basket-conainet-sticky {
+        display: none;
+    }
+
+    .mb-md-100 {
+        margin-bottom: 100px;
+    }
+
+    .bucket-conainet-sticky {
+        display: none;
+    }
+
+    .mobie-items {
+        display: block;
+    }
+
+    /* .banner-image {
+        margin-top: 86px;
+    } */
+}
+
+@media(max-width: 769px) {
+    .kfc-new-address-web{
+        margin-top: -6px !important ;
+    }
+    .b-card-web {
+        display: none;
+    }
+
+    .b-card-mob {
+        display: block;
+    }
+
+    .category-container {
+        justify-content: start;
+    }
+
+    .cart-basket-sticky {
+        display: block;
+        display: flex !important;
+    }
+
+    .item-card-header {
+        display: none;
+    }
+
+    .product-detail h5 {
+        margin-block: 10px;
+    }
+
+    .quantity-container {
+        justify-content: center;
+    }
+
+    .quantity-container button {
+        width: 100%;
+    }
+
+    .quantity-container {
+        gap: 20px;
+    }
+
+    .mitao-bhook {
+        width: 60%;
+    }
+
+    .kfc-bhook {
+        padding: 40px 15px;
+    }
+
+    .bestseller-container {
+        width: 200px;
+        height: 300px;
+    }
+
+    .mt-sm-40 {
+        margin-top: 40px;
+    }
+}
+
+@media(max-width: 600px) {
+    .product-add {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .product-page {
+        padding: 20px 70px 70px 50px;
+    }
+}
+
+@media(max-width: 500px) {
+    .app-kfc{
+        padding-left: 35px;
+    }
+    .mobile-powered{
+        display: block;
+    }
+    .kfc-all-rights{
+        display: none !important;
+    }
+    .welcome-login h3 {
+        font-size: 30px;
+    }
+    .item-name .accordion-body {
+        padding: 5px 10px 13px 25px;
+    }
+
+    .dec-btn {
+        min-width: 45px !important;
+    }
+
+    .incre-btn i {
+        font-size: 20px;
+    }
+
+    .kfc-add-box {
+        width: 130px;
+    }
+
+    .searchbox-wrap button span {
+        padding: 12px 25px;
+    }
+
+    .select-emojy img {
+        width: 60px !important;
+    }
+
+    .rate-box h5 {
+        width: 85%;
+        margin: auto;
+    }
+
+    .basket-error {
+        display: none;
+    }
+
+    .footer-info {
+        margin-bottom: 0;
+    }
+
+    .card-img {
+        height: 160px;
+    }
+
+    .bestseller-container {
+        height: 250px;
+    }
+
+    .login-animation {
+        width: 200px;
+    }
+
+    .login-container {}
+
+    .browse-container .slick-slider {
+        width: 75%;
+        margin: 0 auto;
+    }
+
+    .mt-120 {
+        margin-top: 120px;
+    }
+
+    .best-seller-img h6 {
+        font-size: 20px;
+    }
+
+    .header-logo-mobile {
+        display: block;
+    }
+
+    .header-login {
+        display: none;
+    }
+
+    .contact-name {
+        font-size: 18px;
+    }
+
+    .kfc-mmm {
+        font-size: 18px;
+    }
+
+    .detail-btn {
+        font-size: 10px !important;
+        padding: 0 5px !important;
+    }
+
+    .menu-card {
+        padding: 7px;
+        padding-bottom: 22px;
+    }
+
+    .price-label button {
+        font-size: 12px;
+        height: 30px;
+    }
+    .rgeister-btn span {
+        padding: 11px 2px;
+    }
+    .profile-link {
+        font-size: 24px !important;
+    }
+
+    .side-menu {
+        font-size: 13px;
+        width: 110px;
+    }
+
+    .menu-card .card-text {
+        width: 100%;
+        height: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        margin-bottom: 5px;
+    }
+
+    .menu-card .card-title {
+        width: 100%;
+        height: 47px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .Add-web {
+        display: none;
+    }
+
+    .Add-mobil {
+        display: block;
+    }
+
+    .fly-btn .Add-mobil {
+        display: block;
+    }
+
+    .fly-btn .Add-web {
+        display: none;
+    }
+
+    .fly-btn .rgeister-btn {
+        font-size: 10px;
+    }
+
+    .about-kfc p {
+        text-align: center;
+    }
+
+    .about-kfc {
+        padding: 20px;
+    }
+
+    .about-history h4 {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .brand-logo {
+        width: 50px;
+    }
+
+    .order-title {
+        font-size: 11px;
+    }
+
+    .pickup-store-mobile {
+        top: 51px !important;
+    }
+
+    .history-btn {
+        padding: 5px !important;
+        font-size: 12px !important;
+    }
+
+    .order-history img {
+        width: 50px;
+        top: 10px;
+    }
+
+    .order-history .card h5 {
+        font-size: 16px;
+    }
+
+    .order-history .card p {
+        font-size: 12px;
+    }
+
+    .about-title {
+        font-size: 28px;
+    }
+
+    .final-product {
+        width: 100%;
+    }
+
+    .cart-btn {
+        width: 30px;
+        height: 30px;
+    }
+
+    .category-container-custom {
+        padding: 0px clamp(1rem, calc(-6rem + 9vw), 8rem);
+    }
+
+    .your-items .item-text {
+        font-size: 18px;
+    }
+
+    .your-items img {
+        width: 70px;
+    }
+
+    .about-buket {
+        margin-top: -35px !important;
+    }
+
+    .about-scholarship {
+        padding: 25px 54px;
+    }
+
+    .your-items .add-btn {
+        padding: 0px 3px !important;
+        font-size: 12px !important;
+    }
+
+    .add-btn i {
+        font-size: 17px;
+        font-weight: 600;
+    }
+
+    .reorder-btn {
+        width: 95%;
+    }
+}
+
+@media(max-width: 525px) {
+
+    .burgur-btn {
+        font-size: 20px;
+    }
+
+    .pickup-store-name p {
+        font-size: 12px;
+        width: 220px;
+        height: 18px;
+    }
+
+    .pickup-store-name h4 {
+        font-size: 12px;
+    }
+
+    .mobile-cart {
+        width: 98%;
+        bottom: 10px;
+    }
+
+    .mt-170 {
+        margin-top: 170px !important;
+    }
+
+    .category-container {
+        top: 105px;
+        padding-right: 106px;
+
+    }
+
+    .login-field {
+        width: 90%;
+    }
+
+    .border-login span {
+        font-size: 12px;
+    }
+
+    .order-option {
+        padding: 6px 12px;
+    }
+
+    /* .pickup-store-name {
+        display: none;
+    } */
+
+    .pickup-store-mobile {
+        color: var(--white);
+        position: fixed;
+        left: 0;
+        width: 100%;
+        background-color: var(--black);
+        text-align: center;
+        display: block;
+        top: 60px;
+    }
+
+    .pickup-store-mobile h4 {
+        font-size: 16px;
+    }
+
+    .pickup-store-mobile p {
+        margin-bottom: 3px;
+    }
+
+    .offer-banner {
+        margin-top: 117px;
+    }
+
+    .fly-cart-btn {
+        right: 0px !important;
+        top: 40px !important;
+    }
+
+    .profile-page {
+        margin-top: 155px;
+    }
+
+    .pickup-title {
+        display: block;
+    }
+
+    .track-order {
+        width: 95%;
+    }
+
+    .kfc-order .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
+        width: 35px !important;
+        height: 35px !important;
+    }
+
+    .kfc-order .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+        width: 35px !important;
+        height: 35px !important;
+    }
+
+    .kfc-order .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root {
+        width: 35px !important;
+        height: 35px !important;
+    }
+
+    .kfc-order .css-1hv8oq8-MuiStepLabel-label.MuiStepLabel-alternativeLabel {
+        font-size: 16px !important;
+    }
+
+    .kfc-order .css-zpcwqm-MuiStepConnector-root {
+        top: 15px !important;
+    }
+
+    .contant-title-scholar {
+        font-size: 48px;
+        padding: 15px 0px;
+    }
+
+    .about-togather {
+
+        margin-top: 50px;
+    }
+
+    .scholaeship-list {
+        font-size: 22px;
+        margin-top: 8px;
+    }
+
+    .about-togather {
+        padding: 40px 0px;
+        margin-bottom: 30px;
+    }
+
+    .contant-bhook h2 {
+        font-size: 22px;
+        margin: 30px auto 52px;
+    }
+
+    .higher-education-scholar {
+        font-size: 24px;
+    }
+
+    .banner-image {
+        height: 120px;
+    }
+
+    .order-mobile {
+        top: 65px;
+        padding: 5px;
+    }
+
+    .mobile-scroll {
+        transition: transform 0.1s ease;
+        width: auto;
+    }
+}
+
+
+/* ===Popup Media Quree=== */
+@media(max-width: 767px) {
+    .detail--add {
+        margin-left: 30px;
+    
+    }
+
+    .select-emojy img {
+        width: 70px;
+    }
+
+    .browse-container .slick-slider {
+        width: 75%;
+        margin: 0 auto;
+    }
+
+    .order-one {
+        order: 1;
+    }
+
+    .modal-content {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .item-img {
+        margin-top: 5px;
+    }
+
+    .modal-content {
+        border-radius: 10px;
+    }
+
+    .modal-header .btn-close {
+        top: 35px;
+        right: 5px;
+        width: 15px;
+    }
+
+    .menu-box {
+        height: auto;
+        overflow-y: auto;
+        margin-top: -50px;
+    }
+
+    .item-img img {
+        width: 55%;
+    }
+
+    .item-name .accordion-button {
+        font-size: 16px;
+    }
+
+    .motal-cart-mobile a span {
+        width: 70%;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+        font-size: 14px;
+        font-family: var(--font-medium);
+        text-transform: uppercase;
+        line-height: 1;
+    }
+
+    .main-heading {
+        margin-bottom: 0px;
+    }
+
+    .modal-content {
+        height: 93vh;
+    }
+
+    .profile-tab {
+        flex-direction: initial !important;
+        flex-wrap: inherit !important;
+        overflow: auto !important;
+    }
+
+    .profile-tab-btn {
+        white-space: nowrap;
+    }
+
+    .profile-tab {
+        background-color: transparent;
+    }
+
+    .delivery-time h4 {
+        font-size: 14px;
+    }
+
+    .delivery-time h5 {
+        font-size: 14px;
+    }
+
+    .education-history {
+        padding: 23px;
+        text-align: center;
+    }
+}
+
+@media(max-width:1094px) {
+    .rate-box {
+        width: 100%;
+        height: auto;
+        padding: 22px;
+        text-align: center;
+    }
+
+    .px-larg-4 {
+        padding-right: 12px;
+    }
+}
+
+@media(min-width:1440px) {
+    .cart-data {
+        position: unset;
+    }
+
+    .category-container-custom {
+        padding: 0;
+    }
+}
+
+@media(max-width: 375px) {
+    .detail--add {
+        margin-left: 40px;
+    }
+    .detail-btn-back{
+        left: 15px;
+    }
+    .kfc-add-box {
+        width: 130px;
+    }
+
+    .items-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .welcome-login {
+        padding: 0px 15px;
+    }
+
+    .pickup-store-name p {
+        width: 150px;
+    }
+}
+
+@media(max-width: 345px) {
+    .kfc-add-box {
+        width: 100px;
+    }
+}

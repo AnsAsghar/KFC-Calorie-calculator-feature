@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFC Website Launcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #1c1816;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        h1 {
+            color: #ea002a;
+            margin-bottom: 30px;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .button {
+            display: block;
+            background-color: #ea002a;
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #c0001f;
+        }
+        .note {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="images/29700d60-f1a2-11ef-9e56-b384176afb2a-Cheesy_variant_0-2025-02-23045345.png" alt="KFC Logo">
+        <h1>KFC Website Launcher</h1>
+        <div class="button-container">
+            <a href="standalone-menu.html" class="button">Open Menu Page</a>
+            <a href="standalone-calories.html" class="button">Open Calories Calculator</a>
+        </div>
+        <p class="note">
+            Note: This launcher allows you to open the standalone versions of the pages directly without a server.
+            <br>
+            For the full website experience with proper navigation, use the Python server.
+        </p>
+    </div>
+</body>
+</html>

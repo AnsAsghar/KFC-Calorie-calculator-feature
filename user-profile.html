@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFC - Your Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :root {
+            --theam: #ea002a;
+            --black: #000;
+            --white: #fff;
+            --second-color: #1c1816;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: Arial, sans-serif;
+        }
+
+        .header-container {
+            background-color: var(--black);
+            padding: 15px 0;
+        }
+
+        .navbar {
+            padding: 0;
+        }
+
+        .navbar-brand img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .profile-container {
+            background-color: #1c1816;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .profile-title {
+            color: var(--theam);
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .profile-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--theam);
+        }
+
+        .calorie-card {
+            background-color: var(--black);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .calorie-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .calorie-label {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .progress-container {
+            margin: 20px 0;
+        }
+
+        .progress {
+            height: 10px;
+            background-color: #333;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background-color: var(--theam);
+        }
+
+        .progress-warning .progress-bar {
+            background-color: #ffc107;
+        }
+
+        .progress-danger .progress-bar {
+            background-color: #dc3545;
+        }
+
+        .calorie-goal-selector {
+            margin-top: 20px;
+        }
+
+        .goal-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .goal-option input {
+            margin-right: 10px;
+        }
+
+        .btn-save {
+            background-color: var(--theam);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .btn-save:hover {
+            background-color: #c0001f;
+        }
+
+        .footer-container {
+            background-color: var(--black);
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+
+        .meal-history {
+            margin-top: 30px;
+        }
+
+        .meal-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .meal-item:last-child {
+            border-bottom: none;
+        }
+
+        .meal-date {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* Cart icon */
+        #cart-icon {
+            position: relative;
+            font-size: 24px;
+            color: white;
+        }
+
+        .count-item {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: var(--theam);
+            color: white;
+            font-size: 12px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <!-- Header Section -->
+        <header class="header-container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="navbar navbar-expand-lg navbar-dark">
+                            <div class="container-fluid">
+                                <a class="navbar-brand" href="#">
+                                    <img src="images/29700d60-f1a2-11ef-9e56-b384176afb2a-Cheesy_variant_0-2025-02-23045345.png" alt="KFC Logo" style="width: 60px; height: 60px; object-fit: contain;">
+                                </a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                    <ul class="navbar-nav ms-auto">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="index.html">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="standalone-menu.html">Menu</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="standalone-calories.html">Calories Calculator</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="user-profile.html">My Profile</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">About</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" id="cart-icon">
+                                                <i class="ri-shopping-cart-2-line"></i>
+                                                <span id="cart-count" class="count-item">0</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Profile Section -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="profile-container">
+                        <h2 class="profile-title">MY PROFILE</h2>
+
+                        <div class="profile-section">
+                            <div class="section-title">Your Calorie Goals</div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="calorie-card">
+                                        <div class="calorie-value" id="maintainCalories">0</div>
+                                        <div class="calorie-label">Calories to Maintain Weight</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="calorie-card">
+                                        <div class="calorie-value" id="loseCalories">0</div>
+                                        <div class="calorie-label">Calories to Lose Weight</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="calorie-card">
+                                        <div class="calorie-value" id="gainCalories">0</div>
+                                        <div class="calorie-label">Calories to Gain Weight</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="calorie-goal-selector">
+                                <div class="section-title">Select Your Goal</div>
+                                <div class="goal-option">
+                                    <input type="radio" id="goal-maintain" name="calorie-goal" value="maintain">
+                                    <label for="goal-maintain">Maintain Weight</label>
+                                </div>
+                                <div class="goal-option">
+                                    <input type="radio" id="goal-lose" name="calorie-goal" value="lose">
+                                    <label for="goal-lose">Lose Weight</label>
+                                </div>
+                                <div class="goal-option">
+                                    <input type="radio" id="goal-gain" name="calorie-goal" value="gain">
+                                    <label for="goal-gain">Gain Weight</label>
+                                </div>
+                                <button class="btn btn-save" id="saveGoalBtn">Save Goal</button>
+                            </div>
+                        </div>
+
+                        <div class="profile-section">
+                            <div class="section-title">Today's Calorie Intake</div>
+                            <div class="calorie-card">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="calorie-value" id="currentCalories">0</div>
+                                        <div class="calorie-label">Calories Consumed Today</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="calorie-value" id="remainingCalories">0</div>
+                                        <div class="calorie-label">Calories Remaining</div>
+                                    </div>
+                                </div>
+                                <div class="progress-container">
+                                    <div class="progress" id="calorieProgress">
+                                        <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div id="calorieWarning" class="text-warning" style="display: none;">
+                                    <i class="ri-error-warning-line"></i> You're approaching your daily calorie limit!
+                                </div>
+                                <div id="calorieExceeded" class="text-danger" style="display: none;">
+                                    <i class="ri-error-warning-line"></i> You've exceeded your daily calorie limit!
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-section">
+                            <div class="section-title">Monthly Calorie Tracking</div>
+                            <div class="calorie-card">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="calorie-value" id="monthlyCalories">0</div>
+                                        <div class="calorie-label">Calories This Month</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="calorie-value" id="monthlyLimit">0</div>
+                                        <div class="calorie-label">Monthly Limit</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="calorie-value" id="monthlyRemaining">0</div>
+                                        <div class="calorie-label">Remaining This Month</div>
+                                    </div>
+                                </div>
+
+                                <div class="progress-container">
+                                    <div class="progress" id="monthlyProgress">
+                                        <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+
+                                <div id="monthlyWarning" class="text-warning" style="display: none;">
+                                    <i class="ri-error-warning-line"></i> You're approaching your monthly calorie limit!
+                                </div>
+                                <div id="monthlyExceeded" class="text-danger" style="display: none;">
+                                    <i class="ri-error-warning-line"></i> You've exceeded your monthly calorie limit!
+                                </div>
+
+                                <div class="monthly-limit-setter mt-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <input type="number" class="form-control" id="monthlyLimitInput" placeholder="Set your monthly calorie limit">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button class="btn btn-save w-100" id="saveMonthlyLimitBtn">Save Limit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-section">
+                            <div class="section-title">Your Information</div>
+                            <div class="calorie-card">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="calorie-label">Weight</div>
+                                        <div class="calorie-value" id="userWeight">0 kg</div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="calorie-label">Height</div>
+                                        <div class="calorie-value" id="userHeight">0 cm</div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="calorie-label">Age</div>
+                                        <div class="calorie-value" id="userAge">0</div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="calorie-label">Activity Level</div>
+                                        <div class="calorie-value" id="userActivity">-</div>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <a href="standalone-calories.html" class="btn btn-save">Update Information</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-section">
+                            <div class="section-title">Recent Meal History</div>
+                            <div class="calorie-card">
+                                <div id="mealHistory">
+                                    <!-- Meal history will be populated here -->
+                                    <div class="text-center text-muted">No recent meals found.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-section">
+                            <div class="section-title">Monthly Calorie History</div>
+                            <div class="calorie-card">
+                                <div class="monthly-chart-container">
+                                    <canvas id="monthlyCalorieChart" height="250"></canvas>
+                                </div>
+                                <div class="text-center text-muted mt-3" id="noChartData" style="display: none;">
+                                    No calorie data available for this month.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <footer class="footer-container mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <img src="images/29700d60-f1a2-11ef-9e56-b384176afb2a-Cheesy_variant_0-2025-02-23045345.png" alt="KFC Logo" width="80" height="80" style="object-fit: contain;">
+                        <p class="text-white mt-3">© 2023 KFC Pakistan. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load user data from localStorage
+            loadUserData();
+
+            // Update cart count
+            updateCartCount();
+
+            // Add event listener to save goal button
+            document.getElementById('saveGoalBtn').addEventListener('click', saveUserGoal);
+
+            // Add event listener to save monthly limit button
+            document.getElementById('saveMonthlyLimitBtn').addEventListener('click', saveMonthlyLimit);
+
+            // Add click event to cart icon
+            document.getElementById('cart-icon').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'standalone-menu.html#cart';
+            });
+
+            // Initialize monthly calorie chart
+            initMonthlyCalorieChart();
+        });
+
+        // Function to load user data from localStorage
+        function loadUserData() {
+            // Load calorie goals
+            const calorieGoals = JSON.parse(localStorage.getItem('calorieGoals')) || {};
+            if (calorieGoals.maintain) {
+                document.getElementById('maintainCalories').textContent = calorieGoals.maintain;
+                document.getElementById('loseCalories').textContent = calorieGoals.lose;
+                document.getElementById('gainCalories').textContent = calorieGoals.gain;
+            }
+
+            // Load selected goal
+            const selectedGoal = localStorage.getItem('selectedGoal');
+            if (selectedGoal) {
+                document.getElementById(`goal-${selectedGoal}`).checked = true;
+            }
+
+            // Load user info
+            const userInfo = JSON.parse(localStorage.getItem('userInfo')) || {};
+            if (userInfo.weight) {
+                document.getElementById('userWeight').textContent = `${userInfo.weight} kg`;
+                document.getElementById('userHeight').textContent = `${userInfo.height} cm`;
+                document.getElementById('userAge').textContent = userInfo.age;
+                document.getElementById('userActivity').textContent = formatActivityLevel(userInfo.activityLevel);
+            }
+
+            // Load today's calorie intake
+            const today = new Date().toISOString().split('T')[0];
+            const calorieIntake = JSON.parse(localStorage.getItem('calorieIntake')) || {};
+            const todayCalories = calorieIntake[today] || 0;
+
+            document.getElementById('currentCalories').textContent = todayCalories;
+
+            // Calculate remaining calories based on goal
+            let goalCalories = 0;
+            if (selectedGoal && calorieGoals[selectedGoal]) {
+                goalCalories = calorieGoals[selectedGoal];
+            }
+
+            const remainingCalories = goalCalories - todayCalories;
+            document.getElementById('remainingCalories').textContent = remainingCalories > 0 ? remainingCalories : 0;
+
+            // Update progress bar
+            if (goalCalories > 0) {
+                const percentage = Math.min((todayCalories / goalCalories) * 100, 100);
+                const progressBar = document.getElementById('calorieProgress').querySelector('.progress-bar');
+                progressBar.style.width = `${percentage}%`;
+
+                // Show warnings if needed
+                if (percentage >= 90 && percentage < 100) {
+                    document.getElementById('calorieWarning').style.display = 'block';
+                    document.getElementById('calorieProgress').classList.add('progress-warning');
+                } else if (percentage >= 100) {
+                    document.getElementById('calorieExceeded').style.display = 'block';
+                    document.getElementById('calorieProgress').classList.add('progress-danger');
+                }
+            }
+
+            // Load monthly calorie data
+            loadMonthlyCalorieData();
+
+            // Load meal history
+            loadMealHistory();
+        }
+
+        // Function to load monthly calorie data
+        function loadMonthlyCalorieData() {
+            // Get current month and year
+            const now = new Date();
+            const currentMonth = now.getMonth() + 1; // JavaScript months are 0-indexed
+            const currentYear = now.getFullYear();
+
+            // Calculate monthly calories
+            const calorieIntake = JSON.parse(localStorage.getItem('calorieIntake')) || {};
+            let monthlyTotal = 0;
+
+            // Loop through all dates in calorieIntake
+            for (const dateStr in calorieIntake) {
+                const date = new Date(dateStr);
+                // Check if this date is in the current month
+                if (date.getMonth() + 1 === currentMonth && date.getFullYear() === currentYear) {
+                    monthlyTotal += calorieIntake[dateStr];
+                }
+            }
+
+            // Get monthly limit
+            const monthlyLimit = parseInt(localStorage.getItem('monthlyCalorieLimit')) || 0;
+
+            // Update UI
+            document.getElementById('monthlyCalories').textContent = monthlyTotal;
+            document.getElementById('monthlyLimit').textContent = monthlyLimit;
+
+            // Calculate remaining calories for the month
+            const monthlyRemaining = monthlyLimit > 0 ? Math.max(0, monthlyLimit - monthlyTotal) : 0;
+            document.getElementById('monthlyRemaining').textContent = monthlyRemaining;
+
+            // Set input value to current limit
+            if (monthlyLimit > 0) {
+                document.getElementById('monthlyLimitInput').value = monthlyLimit;
+            }
+
+            // Update progress bar
+            if (monthlyLimit > 0) {
+                const percentage = Math.min((monthlyTotal / monthlyLimit) * 100, 100);
+                const progressBar = document.getElementById('monthlyProgress').querySelector('.progress-bar');
+                progressBar.style.width = `${percentage}%`;
+
+                // Show warnings if needed
+                if (percentage >= 90 && percentage < 100) {
+                    document.getElementById('monthlyWarning').style.display = 'block';
+                    document.getElementById('monthlyProgress').classList.add('progress-warning');
+                } else if (percentage >= 100) {
+                    document.getElementById('monthlyExceeded').style.display = 'block';
+                    document.getElementById('monthlyProgress').classList.add('progress-danger');
+                }
+            }
+        }
+
+        // Function to save user goal
+        function saveUserGoal() {
+            const goalRadios = document.getElementsByName('calorie-goal');
+            let selectedGoal = '';
+
+            for (const radio of goalRadios) {
+                if (radio.checked) {
+                    selectedGoal = radio.value;
+                    break;
+                }
+            }
+
+            if (selectedGoal) {
+                localStorage.setItem('selectedGoal', selectedGoal);
+                showNotification('Your calorie goal has been saved!');
+
+                // Reload user data to update the UI
+                loadUserData();
+            } else {
+                showNotification('Please select a goal first!', 'warning');
+            }
+        }
+
+        // Function to load meal history
+        function loadMealHistory() {
+            const mealHistory = JSON.parse(localStorage.getItem('mealHistory')) || [];
+            const mealHistoryContainer = document.getElementById('mealHistory');
+
+            if (mealHistory.length === 0) {
+                return; // Keep the default "No recent meals found" message
+            }
+
+            // Clear the container
+            mealHistoryContainer.innerHTML = '';
+
+            // Sort meals by date (newest first)
+            mealHistory.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // Display the 5 most recent meals
+            const recentMeals = mealHistory.slice(0, 5);
+
+            recentMeals.forEach(meal => {
+                const mealDate = new Date(meal.date);
+                const formattedDate = mealDate.toLocaleDateString() + ' ' + mealDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                const mealItem = document.createElement('div');
+                mealItem.className = 'meal-item';
+                mealItem.innerHTML = `
+                    <div>
+                        <div>${meal.title}</div>
+                        <div class="meal-date">${formattedDate}</div>
+                    </div>
+                    <div>
+                        <strong>${meal.calories} Cal</strong>
+                    </div>
+                `;
+
+                mealHistoryContainer.appendChild(mealItem);
+            });
+        }
+
+        // Function to update cart count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartCount = 0;
+
+            cart.forEach(item => {
+                cartCount += item.quantity;
+            });
+
+            document.getElementById('cart-count').textContent = cartCount;
+        }
+
+        // Function to save monthly calorie limit
+        function saveMonthlyLimit() {
+            const limitInput = document.getElementById('monthlyLimitInput');
+            const limit = parseInt(limitInput.value);
+
+            if (limit > 0) {
+                localStorage.setItem('monthlyCalorieLimit', limit);
+                showNotification('Monthly calorie limit has been saved!');
+
+                // Reload monthly calorie data to update UI
+                loadMonthlyCalorieData();
+
+                // Update chart
+                initMonthlyCalorieChart();
+            } else {
+                showNotification('Please enter a valid calorie limit!', 'warning');
+            }
+        }
+
+        // Function to initialize monthly calorie chart
+        function initMonthlyCalorieChart() {
+            const ctx = document.getElementById('monthlyCalorieChart').getContext('2d');
+
+            // Get current month and year
+            const now = new Date();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+
+            // Get days in current month
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            // Prepare data
+            const calorieIntake = JSON.parse(localStorage.getItem('calorieIntake')) || {};
+            const monthlyLimit = parseInt(localStorage.getItem('monthlyCalorieLimit')) || 0;
+
+            // Create labels for all days in month
+            const labels = [];
+            const data = [];
+            const limitLine = [];
+
+            // Check if we have any data for this month
+            let hasData = false;
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                // Format date as YYYY-MM-DD
+                const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                labels.push(day); // Just show day number on x-axis
+
+                // Get calories for this day
+                const calories = calorieIntake[dateStr] || 0;
+                data.push(calories);
+
+                // Add limit line point
+                limitLine.push(monthlyLimit > 0 ? Math.round(monthlyLimit / daysInMonth) : null);
+
+                // Check if we have data
+                if (calories > 0) hasData = true;
+            }
+
+            // Show/hide no data message
+            document.getElementById('noChartData').style.display = hasData ? 'none' : 'block';
+
+            // If we already have a chart, destroy it
+            if (window.monthlyChart) {
+                window.monthlyChart.destroy();
+            }
+
+            // Create chart
+            window.monthlyChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Daily Calories',
+                            data: data,
+                            backgroundColor: 'rgba(234, 0, 42, 0.7)',
+                            borderColor: 'rgba(234, 0, 42, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Daily Target',
+                            data: limitLine,
+                            type: 'line',
+                            fill: false,
+                            borderColor: '#ffc107',
+                            borderDash: [5, 5],
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Calories'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Day of Month'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: `Calorie Intake for ${new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long' })} ${currentYear}`
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const dayNum = tooltipItems[0].label;
+                                    const date = new Date(currentYear, currentMonth, parseInt(dayNum));
+                                    return date.toLocaleDateString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Function to format activity level
+        function formatActivityLevel(level) {
+            if (!level) return '-';
+
+            switch (level) {
+                case 'sedentary':
+                    return 'Sedentary';
+                case 'light':
+                    return 'Light Activity';
+                case 'moderate':
+                    return 'Moderate Activity';
+                case 'active':
+                    return 'Active';
+                case 'veryActive':
+                    return 'Very Active';
+                case 'extraActive':
+                    return 'Extra Active';
+                default:
+                    return level;
+            }
+        }
+
+        // Function to show notification
+        function showNotification(message, type = 'success') {
+            // Check if notification container exists
+            let notificationContainer = document.getElementById('notification-container');
+
+            if (!notificationContainer) {
+                // Create notification container
+                notificationContainer = document.createElement('div');
+                notificationContainer.id = 'notification-container';
+                notificationContainer.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    z-index: 9999;
+                `;
+                document.body.appendChild(notificationContainer);
+            }
+
+            // Create notification
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+
+            // Set background color based on type
+            let bgColor = '#ea002a'; // default success color
+            if (type === 'warning') {
+                bgColor = '#ffc107';
+            } else if (type === 'error') {
+                bgColor = '#dc3545';
+            }
+
+            notification.style.cssText = `
+                background-color: ${bgColor};
+                color: white;
+                padding: 12px 20px;
+                margin-top: 10px;
+                border-radius: 4px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                animation: fadeIn 0.3s, fadeOut 0.3s 2.7s;
+                opacity: 0;
+            `;
+            notification.textContent = message;
+
+            // Add notification to container
+            notificationContainer.appendChild(notification);
+
+            // Add animation keyframes
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                @keyframes fadeOut {
+                    from { opacity: 1; transform: translateY(0); }
+                    to { opacity: 0; transform: translateY(-20px); }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Trigger animation
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.animation = 'fadeIn 0.3s, fadeOut 0.3s 2.7s';
+            }, 10);
+
+            // Remove notification after animation
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

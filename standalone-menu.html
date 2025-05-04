@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFC Menu - Standalone Version</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :root {
+            --theam: #ea002a;
+            --black: #000;
+            --white: #fff;
+            --second-color: #1c1816;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: Arial, sans-serif;
+        }
+
+        .header-container {
+            background-color: var(--black);
+            padding: 15px 0;
+        }
+
+        .navbar {
+            padding: 0;
+        }
+
+        .navbar-brand img {
+            width: 60px;
+            height: 60px;
+        }
+
+        /* Category navigation */
+        .category-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            overflow-x: auto;
+            background-color: var(--black);
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            padding: 15px;
+        }
+
+        .category-container a {
+            cursor: pointer;
+            background: var(--second-color);
+            text-align: center;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--white);
+            padding: 10px 15px;
+            font-weight: 700;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: background-color 0.3s ease;
+        }
+
+        .category-container a:hover {
+            background-color: #444;
+        }
+
+        .category-active {
+            color: #fff !important;
+            background-color: var(--theam) !important;
+        }
+
+        /* Menu cards */
+        .menu-card {
+            background-color: var(--second-color);
+            color: var(--white);
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+            margin-bottom: 40px;
+            padding: 15px 10px 35px 10px;
+            position: relative;
+            border-radius: 13px;
+            border: none;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-img {
+            height: 200px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-card:hover .card-img {
+            transform: scale(1.07, 1.07);
+        }
+
+        .card-title {
+            padding-top: 8px;
+            font-weight: 600;
+            font-size: 18px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-text {
+            line-height: 19px;
+            font-size: 15px;
+            font-weight: 300;
+            max-height: 58px;
+            min-height: 40px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+
+        .price-label {
+            margin-top: auto;
+            text-align: center;
+        }
+
+        .bg-theme {
+            background-color: var(--theam);
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Menu title */
+        .menu-title {
+            font-weight: 600;
+            color: var(--white);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .menu-title::before {
+            top: 100%;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            content: "";
+            z-index: -1;
+            position: absolute;
+            background-color: var(--theam);
+        }
+
+        /* Footer */
+        .footer-container {
+            background-color: var(--black);
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        /* Cart icon */
+        #cart-icon {
+            position: relative;
+            font-size: 24px;
+            color: white;
+        }
+
+        .count-item {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: var(--theam);
+            color: white;
+            font-size: 12px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Add to cart animation */
+        .menu-card.added-to-cart {
+            animation: addToCartPulse 0.5s ease;
+        }
+
+        @keyframes addToCartPulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Calorie badge */
+        .calorie-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Item detail modal */
+        .item-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: #1c1816;
+            margin: 10% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .item-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        .item-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .nutrition-info {
+            background-color: #000;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .nutrition-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #333;
+        }
+
+        .nutrition-item:last-child {
+            border-bottom: none;
+        }
+
+        .add-to-cart-btn {
+            background-color: var(--theam);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #c0001f;
+        }
+
+        /* Cart page styles */
+        .cart-container {
+            background-color: #1c1816;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .cart-title {
+            color: var(--theam);
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price, .cart-item-calories {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+        }
+
+        .quantity-btn {
+            background-color: #333;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .quantity-value {
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .cart-summary {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #000;
+            border-radius: 8px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .summary-total {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #333;
+        }
+
+        .checkout-btn {
+            background-color: var(--theam);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #c0001f;
+        }
+
+        /* Notification styles */
+        .notification {
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .category-container {
+                justify-content: flex-start;
+                padding-right: 50px;
+            }
+
+            .card-img {
+                height: 150px;
+            }
+
+            .menu-card {
+                padding: 10px;
+            }
+
+            .card-title {
+                font-size: 16px;
+            }
+
+            .card-text {
+                font-size: 14px;
+            }
+
+            #cart-icon {
+                font-size: 20px;
+            }
+
+            .count-item {
+                width: 18px;
+                height: 18px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <!-- Header Section -->
+        <header class="header-container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav class="navbar navbar-expand-lg navbar-dark">
+                            <div class="container-fluid">
+                                <a class="navbar-brand" href="#">
+                                    <img src="images/29700d60-f1a2-11ef-9e56-b384176afb2a-Cheesy_variant_0-2025-02-23045345.png" alt="KFC Logo" style="width: 60px; height: 60px; object-fit: contain;">
+                                </a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                    <ul class="navbar-nav ms-auto">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Menu</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="standalone-calories.html">Calories Calculator</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="user-profile.html">My Profile</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">About</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Contact</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" id="cart-icon">
+                                                <i class="ri-shopping-cart-2-line"></i>
+                                                <span id="cart-count" class="count-item">0</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Menu Categories Section -->
+        <div class="category-container">
+            <a href="#everyday-value" class="category-active">Everyday Value</a>
+            <a href="#ala-carte">Ala-Carte & Combos</a>
+            <a href="#promotions">Promotions</a>
+            <a href="#signature-boxes">Signature Boxes</a>
+            <a href="#sharing">Sharing</a>
+            <a href="#snacks">Snacks & Beverages</a>
+            <a href="#midnight-deals">Midnight Deals</a>
+        </div>
+
+        <!-- Menu Items Section -->
+        <div class="container mt-4">
+            <!-- Everyday Value Section -->
+            <div id="everyday-value" class="row">
+                <div class="col-md-12">
+                    <h2 class="menu-title">EVERYDAY VALUE</h2>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="menu-card" data-calories="350" data-protein="15g" data-carbs="40g" data-fat="12g">
+                        <div class="calorie-badge">350 Cal</div>
+                        <img src="images/29700d60-f1a2-11ef-9e56-b384176afb2a-Krunchburger_variant_0-2025-02-23045345.png" alt="Krunch Burger" class="card-img">
+                        <h5 class="card-title">Krunch Burger</h5>
+                        <p class="card-text">Krunch fillet, spicy mayo, lettuce, sandwiched between a sesame seed bun.</p>
+                        <div class="price-label">
+                            <button class="btn bg-theme">Rs 310</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="menu-card" data-calories="720" data-protein="18g" data-carbs="85g" data-fat="32g">
+                        <div class="calorie-badge">720 Cal</div>
+                        <img src="images/12dd14f0-c523-11ee-a0b2-43ac3530dd54-KRUNCH-590X480-2024-02-06190812.png" alt="Krunch Combo" class="card-img">
+                        <h5 class="card-title">Krunch Combo</h5>
+                        <p class="card-text">Krunch burger with regular fries and drink.</p>
+                        <div class="price-label">
+                            <button class="btn bg-theme">Rs 590</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="menu-card" data-calories="850" data-protein="42g" data-carbs="65g" data-fat="38g">
+                        <div class="calorie-badge">850 Cal</div>
+                        <img src="images/43a98620-ffaa-11ed-b6b3-6970cc1cd666-chicken-n-chips_variant_0-2023-05-31115706.png" alt="Chicken & Chips" class="card-img">
+                        <h5 class="card-title">Chicken & Chips</h5>
+                        <p class="card-text">2 pieces of hot and crispy chicken with fries.</p>
+                        <div class="price-label">
+                            <button class="btn bg-theme">Rs 620</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="menu-card" data-calories="780" data-protein="48g" data-carbs="12g" data-fat="58g">
+                        <div class="calorie-badge">780 Cal</div>
+                        <img src="images/38718ee0-bc17-11ee-97ca-ad9c0958c4fc-Plain-wings-min_variant_0-2024-01-26065041.png" alt="Hot Wings Bucket" class="card-img">
+                        <h5 class="card-title">Hot Wings Bucket</h5>
+                        <p class="card-text">10 pieces of hot and spicy wings.</p>
+                        <div class="price-label">
+                            <button class="btn bg-theme">Rs 670</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signature Boxes Section -->
+            <div id="signature-boxes" class="row mt-5">
+                <div class="col-md-12">
+                    <h2 class="menu-title">SIGNATURE BOXES</h2>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="menu-card" data-calories="2250" data-protein="180g" data-carbs="45g" data-fat="150g">
+                        <div class="calorie-badge">2250 Cal</div>
+                        <img src="images/43a95f10-ffaa-11ed-b673-4121381f04c6-value-Bucket-2023-05-31115706.png" alt="Value Bucket" class="card-img">
+                        <h5 class="card-title">Value Bucket</h5>
+                        <p class="card-text">Enjoy 9 pcs of our Signature Crispy fried chicken, hand-breaded in house. So from every bucket goes to the Mitao Bhook Foundation.</p>
+                        <div class="price-label">
+                            <button class="btn bg-theme">Rs 2050</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="menu-card" data-calories="1650" data-protein="95g" data-carbs="120g" data-fat="85g">
+                        <div class="calorie-badge">1650 Cal</div>
+                        <img src="images/63fb28b0-9627-11ef-b5b6-331c16c28159-CrispyDuoBox-2024-10-29185539.png" alt="Crispy Duo Box" class="card-img">
+                        <h5 class="card-title">Crispy Duo Box</h5>
+                        <p class="card-text">Turn up the fun with a box that's perfect for sharing! Enjoy 5 pcs of Chicken, 1 Large Fries, 2 Regular drinks & 1 Coleslaw.</p>
+                        <div class="price-label">
+                            <button class="btn bg-theme">Rs 1550</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Snacks & Beverages Section -->
+            <div id="snacks" class="row mt-5">
+                <div class="col-md-12">
+                    <h2 class="menu-title">SNACKS & BEVERAGES</h2>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="menu-card" data-calories="120" data-protein="1g" data-carbs="12g" data-fat="8g">
+                        <div class="calorie-badge">120 Cal</div>
+                        <img src="images/61ec55e0-0513-11ee-aee5-69eb5757a047-Coleslaw-2023-06-07091210.png" alt="Coleslaw" class="card-img">
+                        <h5 class="card-title">Coleslaw</h5>
+                        <p class="card-text">Freshly prepared coleslaw.</p>
+                        <div class="price-label">
+                            <button class="btn bg-theme">Rs 150</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="menu-card" data-calories="320" data-protein="4g" data-carbs="42g" data-fat="16g">
+                        <div class="calorie-badge">320 Cal</div>
+                        <img src="images/62153aa0-0513-11ee-8eee-c7aabf77bad4-RegularFries-2023-06-07091210.png" alt="Regular Fries" class="card-img">
+                        <h5 class="card-title">Regular Fries</h5>
+                        <p class="card-text">Crispy and delicious French fries.</p>
+                        <div class="price-label">
+                            <button class="btn bg-theme">Rs 220</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="menu-card" data-calories="250" data-protein="25g" data-carbs="5g" data-fat="15g">
+                        <div class="calorie-badge">250 Cal</div>
+                        <img src="images/62153aa0-0513-11ee-8eee-c7aabf77bad4-1PcChicken-2023-06-07091210.png" alt="1 Pc Chicken" class="card-img">
+                        <h5 class="card-title">1 Pc Chicken</h5>
+                        <p class="card-text">1 piece of our signature crispy fried chicken.</p>
+                        <div class="price-label">
+                            <button class="btn bg-theme">Rs 270</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Item Detail Modal -->
+        <div id="itemModal" class="item-modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div class="item-details">
+                    <img id="modalItemImage" src="" alt="" class="item-image">
+                    <div class="item-info">
+                        <h3 id="modalItemTitle"></h3>
+                        <h4 id="modalItemPrice"></h4>
+                    </div>
+                    <p id="modalItemDescription"></p>
+                    <div class="nutrition-info">
+                        <h5 class="mb-3">Nutrition Information</h5>
+                        <div class="nutrition-item">
+                            <span>Calories</span>
+                            <span id="modalItemCalories"></span>
+                        </div>
+                        <div class="nutrition-item">
+                            <span>Protein</span>
+                            <span id="modalItemProtein"></span>
+                        </div>
+                        <div class="nutrition-item">
+                            <span>Carbs</span>
+                            <span id="modalItemCarbs"></span>
+                        </div>
+                        <div class="nutrition-item">
+                            <span>Fat</span>
+                            <span id="modalItemFat"></span>
+                        </div>
+                    </div>
+                    <button id="modalAddToCartBtn" class="add-to-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart Page -->
+        <div id="cartPage" style="display: none;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="cart-container">
+                            <h2 class="cart-title">YOUR CART</h2>
+                            <div id="cartItems">
+                                <!-- Cart items will be added here dynamically -->
+                            </div>
+                            <div id="emptyCartMessage" style="text-align: center; padding: 20px;">
+                                Your cart is empty. Add some delicious items!
+                            </div>
+                            <div id="cartSummary" class="cart-summary" style="display: none;">
+                                <div class="summary-item">
+                                    <span>Subtotal</span>
+                                    <span id="subtotalAmount"></span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Tax (5%)</span>
+                                    <span id="taxAmount"></span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Delivery Fee</span>
+                                    <span>Rs 100</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Total Calories</span>
+                                    <span id="totalCalories"></span>
+                                </div>
+                                <div class="summary-item summary-total">
+                                    <span>Total</span>
+                                    <span id="totalAmount"></span>
+                                </div>
+                            </div>
+                            <button id="checkoutBtn" class="checkout-btn" style="display: none;">Proceed to Checkout</button>
+                            <button id="continueShoppingBtn" class="btn btn-outline-light mt-3 w-100">Continue Shopping</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <footer class="footer-container mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <img src="images/29700d60-f1a2-11ef-9e56-b384176afb2a-Cheesy_variant_0-2025-02-23045345.png" alt="KFC Logo" width="80" height="80" style="object-fit: contain;">
+                        <p class="text-white mt-3">© 2023 KFC Pakistan. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS for Menu Interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cart functionality
+            let cart = [];
+            let cartCount = 0;
+            let menuPage = document.querySelector('.container.mt-4');
+            let cartPage = document.getElementById('cartPage');
+            let itemModal = document.getElementById('itemModal');
+            let currentItem = null;
+
+            // Get modal elements
+            const modalItemImage = document.getElementById('modalItemImage');
+            const modalItemTitle = document.getElementById('modalItemTitle');
+            const modalItemPrice = document.getElementById('modalItemPrice');
+            const modalItemDescription = document.getElementById('modalItemDescription');
+            const modalItemCalories = document.getElementById('modalItemCalories');
+            const modalItemProtein = document.getElementById('modalItemProtein');
+            const modalItemCarbs = document.getElementById('modalItemCarbs');
+            const modalItemFat = document.getElementById('modalItemFat');
+            const modalAddToCartBtn = document.getElementById('modalAddToCartBtn');
+            const closeModalBtn = document.querySelector('.close-modal');
+
+            // Add click event listeners to menu items
+            const menuCards = document.querySelectorAll('.menu-card');
+
+            menuCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Prevent adding to cart if clicking on the price button
+                    if (e.target.classList.contains('btn')) {
+                        return;
+                    }
+
+                    // Get item details
+                    const title = this.querySelector('.card-title').textContent;
+                    const description = this.querySelector('.card-text').textContent;
+                    const price = this.querySelector('.price-label button').textContent;
+                    const imgSrc = this.querySelector('.card-img').src;
+                    const calories = this.getAttribute('data-calories');
+                    const protein = this.getAttribute('data-protein');
+                    const carbs = this.getAttribute('data-carbs');
+                    const fat = this.getAttribute('data-fat');
+
+                    // Store current item
+                    currentItem = {
+                        title,
+                        description,
+                        price,
+                        imgSrc,
+                        calories,
+                        protein,
+                        carbs,
+                        fat
+                    };
+
+                    // Populate modal with item details
+                    modalItemImage.src = imgSrc;
+                    modalItemImage.alt = title;
+                    modalItemTitle.textContent = title;
+                    modalItemPrice.textContent = price;
+                    modalItemDescription.textContent = description;
+                    modalItemCalories.textContent = calories + ' kcal';
+                    modalItemProtein.textContent = protein;
+                    modalItemCarbs.textContent = carbs;
+                    modalItemFat.textContent = fat;
+
+                    // Show modal
+                    itemModal.style.display = 'block';
+                });
+            });
+
+            // Close modal when clicking the close button
+            closeModalBtn.addEventListener('click', function() {
+                itemModal.style.display = 'none';
+            });
+
+            // Close modal when clicking outside the modal content
+            window.addEventListener('click', function(e) {
+                if (e.target === itemModal) {
+                    itemModal.style.display = 'none';
+                }
+            });
+
+            // Add to cart from modal
+            modalAddToCartBtn.addEventListener('click', function() {
+                if (currentItem) {
+                    // Check if item already exists in cart
+                    const existingItemIndex = cart.findIndex(item => item.title === currentItem.title);
+
+                    if (existingItemIndex !== -1) {
+                        // Increment quantity if item already exists
+                        cart[existingItemIndex].quantity++;
+                    } else {
+                        // Add new item to cart
+                        cart.push({
+                            ...currentItem,
+                            quantity: 1
+                        });
+                    }
+
+                    // Update cart count
+                    cartCount++;
+                    document.getElementById('cart-count').textContent = cartCount;
+
+                    // Save cart to localStorage
+                    localStorage.setItem('cart', JSON.stringify(cart));
+
+                    // Close modal
+                    itemModal.style.display = 'none';
+
+                    // Show notification
+                    showNotification(`Added to cart: ${currentItem.title}`);
+
+                    // Check if this would exceed user's calorie goal
+                    checkCalorieGoal(parseInt(currentItem.calories));
+
+                    // Add to user's calorie intake for today
+                    updateCalorieIntake(parseInt(currentItem.calories));
+                }
+            });
+
+            // Function to check if adding this item would exceed user's calorie goal
+            function checkCalorieGoal(itemCalories) {
+                // Check daily limit
+                checkDailyCalorieLimit(itemCalories);
+
+                // Check monthly limit
+                checkMonthlyCalorieLimit(itemCalories);
+            }
+
+            // Function to check daily calorie limit
+            function checkDailyCalorieLimit(itemCalories) {
+                // Get user's selected goal and calorie goals
+                const selectedGoal = localStorage.getItem('selectedGoal');
+                const calorieGoals = JSON.parse(localStorage.getItem('calorieGoals'));
+
+                // If no goal or calorie goals set, return
+                if (!selectedGoal || !calorieGoals) return;
+
+                // Get today's date
+                const today = new Date().toISOString().split('T')[0];
+
+                // Get today's calorie intake
+                const calorieIntake = JSON.parse(localStorage.getItem('calorieIntake')) || {};
+                const todayCalories = calorieIntake[today] || 0;
+
+                // Calculate new total calories
+                const newTotalCalories = todayCalories + itemCalories;
+
+                // Get goal calories
+                const goalCalories = calorieGoals[selectedGoal];
+
+                // Check if new total exceeds 90% of goal
+                if (newTotalCalories >= goalCalories * 0.9 && newTotalCalories < goalCalories) {
+                    // Show warning
+                    showNotification(`Warning: You're approaching your daily calorie limit of ${goalCalories} calories!`, 'warning');
+                } else if (newTotalCalories >= goalCalories) {
+                    // Show exceeded warning
+                    showNotification(`Warning: This item puts you over your daily calorie goal of ${goalCalories} calories!`, 'error');
+                }
+            }
+
+            // Function to check monthly calorie limit
+            function checkMonthlyCalorieLimit(itemCalories) {
+                // Get monthly limit
+                const monthlyLimit = parseInt(localStorage.getItem('monthlyCalorieLimit')) || 0;
+
+                // If no monthly limit set, return
+                if (monthlyLimit <= 0) return;
+
+                // Get current month and year
+                const now = new Date();
+                const currentMonth = now.getMonth() + 1; // JavaScript months are 0-indexed
+                const currentYear = now.getFullYear();
+
+                // Calculate monthly calories
+                const calorieIntake = JSON.parse(localStorage.getItem('calorieIntake')) || {};
+                let monthlyTotal = 0;
+
+                // Loop through all dates in calorieIntake
+                for (const dateStr in calorieIntake) {
+                    const date = new Date(dateStr);
+                    // Check if this date is in the current month
+                    if (date.getMonth() + 1 === currentMonth && date.getFullYear() === currentYear) {
+                        monthlyTotal += calorieIntake[dateStr];
+                    }
+                }
+
+                // Calculate new total calories
+                const newMonthlyTotal = monthlyTotal + itemCalories;
+
+                // Check if new total exceeds 90% of monthly limit
+                if (newMonthlyTotal >= monthlyLimit * 0.9 && newMonthlyTotal < monthlyLimit) {
+                    // Show warning
+                    showNotification(`Warning: You're approaching your monthly calorie limit of ${monthlyLimit} calories!`, 'warning');
+                } else if (newMonthlyTotal >= monthlyLimit) {
+                    // Show exceeded warning
+                    showNotification(`Warning: This item puts you over your monthly calorie limit of ${monthlyLimit} calories!`, 'error');
+                }
+            }
+
+            // Function to update user's calorie intake for today
+            function updateCalorieIntake(itemCalories) {
+                // Get today's date
+                const today = new Date().toISOString().split('T')[0];
+
+                // Get current calorie intake
+                const calorieIntake = JSON.parse(localStorage.getItem('calorieIntake')) || {};
+
+                // Update today's intake
+                calorieIntake[today] = (calorieIntake[today] || 0) + itemCalories;
+
+                // Save to localStorage
+                localStorage.setItem('calorieIntake', JSON.stringify(calorieIntake));
+
+                // Add to meal history
+                addToMealHistory(currentItem.title, itemCalories);
+            }
+
+            // Function to add meal to history
+            function addToMealHistory(itemName, calories) {
+                // Get current meal history
+                const mealHistory = JSON.parse(localStorage.getItem('mealHistory')) || [];
+
+                // Add new meal
+                mealHistory.push({
+                    title: itemName,
+                    calories: calories,
+                    date: new Date().toISOString()
+                });
+
+                // Keep only the last 20 meals
+                if (mealHistory.length > 20) {
+                    mealHistory.shift(); // Remove oldest meal
+                }
+
+                // Save to localStorage
+                localStorage.setItem('mealHistory', JSON.stringify(mealHistory));
+            }
+
+            // Add click event to cart icon to show cart page
+            document.getElementById('cart-icon').addEventListener('click', function(e) {
+                e.preventDefault();
+                showCartPage();
+            });
+
+            // Continue shopping button
+            document.getElementById('continueShoppingBtn').addEventListener('click', function() {
+                hideCartPage();
+            });
+
+            // Checkout button
+            document.getElementById('checkoutBtn').addEventListener('click', function() {
+                // Process the order
+                processOrder();
+            });
+
+            // Function to process the order
+            function processOrder() {
+                // Calculate total calories
+                let totalCalories = 0;
+                cart.forEach(item => {
+                    totalCalories += parseInt(item.calories) * item.quantity;
+                });
+
+                // Show confirmation
+                showNotification(`Order placed successfully! Total calories: ${totalCalories} Cal`);
+
+                // Clear cart
+                cart = [];
+                cartCount = 0;
+                document.getElementById('cart-count').textContent = '0';
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                // Hide cart page
+                hideCartPage();
+            }
+
+            // Function to show cart page
+            function showCartPage() {
+                menuPage.style.display = 'none';
+                cartPage.style.display = 'block';
+                updateCartDisplay();
+            }
+
+            // Function to hide cart page
+            function hideCartPage() {
+                cartPage.style.display = 'none';
+                menuPage.style.display = 'block';
+            }
+
+            // Function to update cart display
+            function updateCartDisplay() {
+                const cartItemsContainer = document.getElementById('cartItems');
+                const emptyCartMessage = document.getElementById('emptyCartMessage');
+                const cartSummary = document.getElementById('cartSummary');
+                const checkoutBtn = document.getElementById('checkoutBtn');
+
+                // Clear cart items container
+                cartItemsContainer.innerHTML = '';
+
+                if (cart.length === 0) {
+                    // Show empty cart message
+                    emptyCartMessage.style.display = 'block';
+                    cartSummary.style.display = 'none';
+                    checkoutBtn.style.display = 'none';
+                    return;
+                }
+
+                // Hide empty cart message
+                emptyCartMessage.style.display = 'none';
+                cartSummary.style.display = 'block';
+                checkoutBtn.style.display = 'block';
+
+                // Calculate totals
+                let subtotal = 0;
+                let totalCalories = 0;
+
+                // Add each item to cart display
+                cart.forEach((item, index) => {
+                    // Extract numeric price
+                    const priceValue = parseInt(item.price.replace(/[^0-9]/g, ''));
+                    const itemTotal = priceValue * item.quantity;
+                    subtotal += itemTotal;
+
+                    // Calculate calories
+                    const itemCalories = parseInt(item.calories) * item.quantity;
+                    totalCalories += itemCalories;
+
+                    // Create cart item element
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <img src="${item.imgSrc}" alt="${item.title}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <h5 class="cart-item-title">${item.title}</h5>
+                            <p class="cart-item-price">${item.price}</p>
+                            <p class="cart-item-calories">${item.calories} Cal per item</p>
+                        </div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn decrease-btn" data-index="${index}">-</button>
+                            <span class="quantity-value">${item.quantity}</span>
+                            <button class="quantity-btn increase-btn" data-index="${index}">+</button>
+                        </div>
+                    `;
+
+                    cartItemsContainer.appendChild(cartItem);
+                });
+
+                // Add event listeners to quantity buttons
+                document.querySelectorAll('.decrease-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        decreaseQuantity(index);
+                    });
+                });
+
+                document.querySelectorAll('.increase-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        increaseQuantity(index);
+                    });
+                });
+
+                // Calculate tax and total
+                const tax = subtotal * 0.05;
+                const deliveryFee = 100;
+                const total = subtotal + tax + deliveryFee;
+
+                // Update summary
+                document.getElementById('subtotalAmount').textContent = `Rs ${subtotal}`;
+                document.getElementById('taxAmount').textContent = `Rs ${tax.toFixed(0)}`;
+                document.getElementById('totalCalories').textContent = `${totalCalories} Cal`;
+                document.getElementById('totalAmount').textContent = `Rs ${total.toFixed(0)}`;
+            }
+
+            // Function to decrease item quantity
+            function decreaseQuantity(index) {
+                if (cart[index].quantity > 1) {
+                    cart[index].quantity--;
+                } else {
+                    cart.splice(index, 1);
+                }
+
+                cartCount--;
+                document.getElementById('cart-count').textContent = cartCount;
+                updateCartDisplay();
+            }
+
+            // Function to increase item quantity
+            function increaseQuantity(index) {
+                cart[index].quantity++;
+                cartCount++;
+                document.getElementById('cart-count').textContent = cartCount;
+                updateCartDisplay();
+            }
+
+            // Function to show notification
+            function showNotification(message, type = 'success') {
+                // Check if notification container exists
+                let notificationContainer = document.getElementById('notification-container');
+
+                if (!notificationContainer) {
+                    // Create notification container
+                    notificationContainer = document.createElement('div');
+                    notificationContainer.id = 'notification-container';
+                    notificationContainer.style.cssText = `
+                        position: fixed;
+                        bottom: 20px;
+                        right: 20px;
+                        z-index: 9999;
+                    `;
+                    document.body.appendChild(notificationContainer);
+                }
+
+                // Create notification
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+
+                // Set background color based on type
+                let bgColor = '#ea002a'; // default success color
+                if (type === 'warning') {
+                    bgColor = '#ffc107';
+                } else if (type === 'error') {
+                    bgColor = '#dc3545';
+                }
+
+                notification.style.cssText = `
+                    background-color: ${bgColor};
+                    color: white;
+                    padding: 12px 20px;
+                    margin-top: 10px;
+                    border-radius: 4px;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                    animation: fadeIn 0.3s, fadeOut 0.3s 2.7s;
+                    opacity: 0;
+                `;
+                notification.textContent = message;
+
+                // Add notification to container
+                notificationContainer.appendChild(notification);
+
+                // Add animation keyframes
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes fadeIn {
+                        from { opacity: 0; transform: translateY(20px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+                    @keyframes fadeOut {
+                        from { opacity: 1; transform: translateY(0); }
+                        to { opacity: 0; transform: translateY(-20px); }
+                    }
+                `;
+                document.head.appendChild(style);
+
+                // Trigger animation
+                setTimeout(() => {
+                    notification.style.opacity = '1';
+                    notification.style.animation = 'fadeIn 0.3s, fadeOut 0.3s 2.7s';
+                }, 10);
+
+                // Remove notification after animation
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+
+            // Smooth scrolling for category links
+            const categoryLinks = document.querySelectorAll('.category-container a');
+
+            categoryLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // Remove active class from all links
+                    categoryLinks.forEach(l => l.classList.remove('category-active'));
+
+                    // Add active class to clicked link
+                    this.classList.add('category-active');
+
+                    // Get the target section
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+
+                    // Scroll to the target section
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 150,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Highlight active category based on scroll position
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.scrollY;
+
+                // Get all section positions
+                const sections = document.querySelectorAll('[id^="everyday-value"], [id^="signature-boxes"], [id^="snacks"]');
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 200;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        // Remove active class from all links
+                        categoryLinks.forEach(link => link.classList.remove('category-active'));
+
+                        // Add active class to corresponding link
+                        const correspondingLink = document.querySelector(`.category-container a[href="#${section.id}"]`);
+                        if (correspondingLink) {
+                            correspondingLink.classList.add('category-active');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

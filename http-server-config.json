@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/static/media/(.*)\\.png", "destination": "/images/$1.png" },
+    { "source": "/static/media/(.*)\\.jpg", "destination": "/images/$1.jpg" },
+    { "source": "/static/media/(.*)\\.jpeg", "destination": "/images/$1.jpeg" },
+    { "source": "/static/media/(.*)\\.svg", "destination": "/images/$1.svg" }
+  ]
+}
