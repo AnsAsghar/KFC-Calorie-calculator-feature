@@ -123,29 +123,81 @@ The calorie tracking system transforms what would be a standard website clone in
 
 ## 📱 Screenshots
 
-### Home Page
-![Home Page](screenshots/Screenshot%20(119).png)
+<div style="text-align: center;">
 
-### Menu with Calorie Information
-![Menu Page with Calorie Information](screenshots/Screenshot%20(120).png)
-![Menu Items with Calorie Details](screenshots/Screenshot%20(121).png)
+### Home & Menu Pages
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px;">
+  <div>
+    <img src="screenshots/Screenshot%20(119).png" alt="Home Page" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+    <p><strong>Home Page</strong></p>
+  </div>
+  <div>
+    <img src="screenshots/Screenshot%20(120).png" alt="Menu Page" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+    <p><strong>Menu with Calorie Information</strong></p>
+  </div>
+</div>
 
-### Calorie Calculator
-![Calorie Calculator](screenshots/Screenshot%20(122).png)
-![Calorie Results](screenshots/Screenshot%20(123).png)
+### Food Item Details & Calorie Calculator
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px;">
+  <div>
+    <img src="screenshots/Screenshot%20(121).png" alt="Menu Item Details" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+    <p><strong>Menu Item with Nutrition Details</strong></p>
+  </div>
+  <div>
+    <img src="screenshots/Screenshot%20(122).png" alt="Calorie Calculator" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+    <p><strong>Personalized Calorie Calculator</strong></p>
+  </div>
+</div>
 
-### User Profile with Calorie Tracking
-![User Profile Overview](screenshots/Screenshot%20(124).png)
-![Monthly Calorie Tracking](screenshots/Screenshot%20(125).png)
-![Calorie History](screenshots/Screenshot%20(126).png)
+### Calorie Results & User Profile
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px;">
+  <div>
+    <img src="screenshots/Screenshot%20(123).png" alt="Calorie Results" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+    <p><strong>Calorie Calculation Results</strong></p>
+  </div>
+  <div>
+    <img src="screenshots/Screenshot%20(124).png" alt="User Profile" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+    <p><strong>User Profile Dashboard</strong></p>
+  </div>
+</div>
 
-### Cart with Calorie Summary
-![Cart Overview](screenshots/Screenshot%20(127).png)
-![Checkout Process](screenshots/Screenshot%20(128).png)
+### Monthly Tracking & History
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px;">
+  <div>
+    <img src="screenshots/Screenshot%20(125).png" alt="Monthly Tracking" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+    <p><strong>Monthly Calorie Tracking</strong></p>
+  </div>
+  <div>
+    <img src="screenshots/Screenshot%20(126).png" alt="Calorie History" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+    <p><strong>Meal History & Analytics</strong></p>
+  </div>
+</div>
 
-### Calorie Warnings
-![Approaching Limit Warning](screenshots/Screenshot%20(129).png)
-![Exceeded Limit Warning](screenshots/Screenshot%20(130).png)
+### Cart & Checkout
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px;">
+  <div>
+    <img src="screenshots/Screenshot%20(127).png" alt="Cart Overview" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+    <p><strong>Cart with Calorie Summary</strong></p>
+  </div>
+  <div>
+    <img src="screenshots/Screenshot%20(128).png" alt="Checkout Process" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+    <p><strong>Checkout Process</strong></p>
+  </div>
+</div>
+
+### Calorie Warning System
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px;">
+  <div>
+    <img src="screenshots/Screenshot%20(129).png" alt="Approaching Limit Warning" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+    <p><strong>Approaching Calorie Limit Warning</strong></p>
+  </div>
+  <div>
+    <img src="screenshots/Screenshot%20(130).png" alt="Exceeded Limit Warning" style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+    <p><strong>Exceeded Calorie Limit Warning</strong></p>
+  </div>
+</div>
+
+</div>
 
 ## 👥 Contributors
 
